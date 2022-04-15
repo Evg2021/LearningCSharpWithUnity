@@ -27,7 +27,7 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         
-        vInput = Input.GetAxis("Vertical") * rotateSpeed;
+        vInput = Input.GetAxis("Vertical") * moveSpeed;
         hInput = Input.GetAxis("Horizontal") * rotateSpeed;
 
         /*4
