@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,13 +20,34 @@ public class PlayerBehaviour : MonoBehaviour
     private Rigidbody _rb;
 
     private CapsuleCollider _col;
+
+    private GameBehavior _gameManager;
     
+    public GameObject test;
+
+    void OnValidate()
+    {
+        if (test)
+        {
+            string name = test.name;
+            char[] chars = name.ToCharArray();
+            for (int i = 0; i < chars.Length; i++)
+            {
+                if (i % 2 == 0 && i > 0)
+                {
+                    chars[i] = '8';
+                }
+            }
+        }
+    }
     void Start()
     {
         
         _rb = GetComponent<Rigidbody>();
 
         _col = GetComponent<CapsuleCollider>();
+
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameBehavior>();
     }
 
     void Update()
@@ -79,5 +101,13 @@ public class PlayerBehaviour : MonoBehaviour
             capsuleBottom, distanceToGround, groundLayer, QueryTriggerInteraction.Ignore);
 
         return grounded;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.name == "Enemy")
+        {
+            _gameManager.HP -= 1;
+        }
     }
 }

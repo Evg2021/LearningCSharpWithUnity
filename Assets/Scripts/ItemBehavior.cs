@@ -5,10 +5,10 @@ using UnityEngine;
 public class ItemBehavior : MonoBehaviour
 {
     public GameBehavior gameManager;
-
+    
     void Start()
     {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameBehavior>();
+        //gameManager = GameObject.Find("Game Manager").GetComponent<GameBehavior>();
     }
     private void OnCollisionEnter(Collision collision)
     {
