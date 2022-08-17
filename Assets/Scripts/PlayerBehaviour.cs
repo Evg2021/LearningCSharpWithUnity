@@ -37,8 +37,9 @@ public class PlayerBehaviour : MonoBehaviour
                 {
                     chars[i] = '8';
                 }
-            }
+            }           
         }
+        
     }
     void Start()
     {
@@ -47,14 +48,14 @@ public class PlayerBehaviour : MonoBehaviour
 
         _col = GetComponent<CapsuleCollider>();
 
-        _gameManager = GameObject.Find("Game Manager").GetComponent<GameBehavior>();
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameBehavior>();
     }
 
     void Update()
     {
         
-        _vInput = Input.GetAxis("Vertical") * moveSpeed;
-        _hInput = Input.GetAxis("Horizontal") * rotateSpeed;
+        //_vInput = Input.GetAxis("Vertical") * moveSpeed;
+        //_hInput = Input.GetAxis("Horizontal") * rotateSpeed;
 
         /*
         this.transform.Translate(Vector3.forward * vInput * Time.deltaTime);         
@@ -65,11 +66,11 @@ public class PlayerBehaviour : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
-        {
+        //if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
+        //{
             
-            _rb.AddForce(Vector3.up * jumpVelocity, ForceMode.Impulse);
-        }
+        //    _rb.AddForce(Vector3.up * jumpVelocity, ForceMode.Impulse);
+        //}
 
         Vector3 rotation = Vector3.up * _hInput;
                 
@@ -81,16 +82,16 @@ public class PlayerBehaviour : MonoBehaviour
                 
         _rb.MoveRotation(_rb.rotation * angleRot);
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            GameObject newBullet = Instantiate(bullet,
-                this.transform.position + new Vector3(1, 0, 0),
-                this.transform.rotation) as GameObject;
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    GameObject newBullet = Instantiate(bullet,
+        //        this.transform.position + new Vector3(1, 0, 0),
+        //        this.transform.rotation) as GameObject;
 
-            Rigidbody bulletRB = newBullet.GetComponent<Rigidbody>();
+        //    Rigidbody bulletRB = newBullet.GetComponent<Rigidbody>();
 
-            bulletRB.velocity = this.transform.forward * bulletSpeed;
-        }
+        //    bulletRB.velocity = this.transform.forward * bulletSpeed;
+        //}
     }
     private bool IsGrounded()
     {

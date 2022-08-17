@@ -6,14 +6,18 @@ using UnityEngine.SceneManagement;
 public class GameBehavior : MonoBehaviour
 { 
     public string labelText = "Collect all 4 items and win your freedom!";
-    public int maxItems = 4;
+    public readonly int maxItems = 4;
     public bool showWinScreen = false;
 
     public bool showLossScreen = false;
 
     private int _itemsCollected = 0;
 
-    
+    void TextScreen()
+    {
+              
+        Time.timeScale = 0f;
+    }
     public int Items
     {
         get { return _itemsCollected; }
@@ -23,11 +27,11 @@ public class GameBehavior : MonoBehaviour
 
             if(_itemsCollected >= maxItems)
             {
+                
                 labelText = "You've found all the items!";
-
                 showWinScreen = true;
-
-                Time.timeScale = 0f;
+                TextScreen();
+                //Time.timeScale = 0f;
             }
             else
             {
@@ -49,7 +53,8 @@ public class GameBehavior : MonoBehaviour
             {
                 labelText = "You want another life with that?";
                 showLossScreen = true;
-                Time.timeScale = 0;
+                TextScreen();  
+                //Time.timeScale = 0;
             }
             else
             {
@@ -58,6 +63,11 @@ public class GameBehavior : MonoBehaviour
         }
     }
 
+    //void RestartLevel()
+    //{
+    //    SceneManager.LoadScene(0);
+    //    Time.timeScale = 1.0f;
+    //}
     private void OnGUI()
     {
         GUI.Box(new Rect(20, 20, 150, 25),
@@ -72,9 +82,7 @@ public class GameBehavior : MonoBehaviour
         {
             if(GUI.Button(new Rect(Screen.width/2 - 100, Screen.height/2 - 50, 200, 100), "YOU WON!"))
             {
-                SceneManager.LoadScene(0);
-
-                Time.timeScale = 1.0f;
+                Utilities.RestartLevel(0);
             }
         }
         if (showLossScreen)
@@ -82,8 +90,7 @@ public class GameBehavior : MonoBehaviour
             if (GUI.Button(new Rect(Screen.width/2 - 100,
                 Screen.height/2-50, 200,100), "You lose..."))
             {
-                SceneManager.LoadScene(0);
-                Time.timeScale = 1.0f;
+                Utilities.RestartLevel();
             }
         }
     }
